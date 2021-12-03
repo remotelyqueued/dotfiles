@@ -1,0 +1,76 @@
+#define font1         CaskaydiaCode Nerd Font
+#define font2         Inconsolata for Powerline
+#define font3         DejaVuSansMono Nerd Font
+#define font4         NotoSansMono Nerd Font
+
+URxvt*letterSpace:    0 
+URxvt*font:           xft:font1:pixelsize=20,             xft:font2:pixelsize=18:minspace=False, xft:font3:pixelsize=18, xft:font4:pixelsize=18
+URxvt*boldFont:       xft:font1:bold:pixelsize=20,        xft:font2:pixelsize=18:minspace=False, xft:font3:pixelsize=18, xft:font4:pixelsize=18
+URxvt*italicFont:     xft:font1:italic:pixelsize=20,      xft:font2:pixelsize=18:minspace=False, xft:font3:pixelsize=18, xft:font4:pixelsize=18
+URxvt*boldItalicFont: xft:font1:bold:italic:pixelsize=20, xft:font2:pixelsize=18:minspace=False, xft:font3:pixelsize=18, xft:font4:pixelsize=18
+
+!https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+URxvt.modifier              : mod1
+URxvt*dynamicColors         : on
+URxvt.imLocale              : en_US.UTF-8
+URxvt.saveLines             : 8192
+
+!python backspace fix?
+URxvt.keysym.Home: \033[1~
+URxvt.keysym.End: \033[4~
+URxvt.keysym.KP_Home: \033[1~
+URxvt.keysym.KP_End:  \033[4~
+
+URxvt.keysym.Shift-Up       : command:\033]720;1\007
+URxvt.keysym.Shift-Down     : command:\033]721;1\007
+
+URxvt*scrollBar_right       : false
+URxvt.scrollBar             : false
+URxvt.scrollstyle           : plain
+URxvt.perl-ext-common       : ...,resize-font,...
+URxvt.internalBorder        : 14
+
+! special
+*.foreground:   #f8f8f2
+*.background:   #282a36
+*.cursorColor:  #d8dee9
+
+! black
+*.color0:       #000000
+*.color8:       #44475a
+
+! red
+*.color1:       #ff5555
+*.color9:       #ff5555
+
+! green
+*.color2:       #50fa7b
+*.color10:      #50fa7b
+
+! yellow
+*.color3:       #f1fa8c
+*.color11:      #f1fa8c
+
+! blue
+*.color4:       #bd93f9
+*.color12:      #bd93f9
+
+! magenta
+*.color5:       #ff79c6
+*.color13:      #ff79c6
+
+! cyan
+*.color6:       #8be9fd
+*.color14:      #8be9fd
+
+! white
+*.color7:       #bbbbbb
+*.color15:      #ffffff
