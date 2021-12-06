@@ -1,16 +1,18 @@
 ###
 # arch
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+##
 
 # shell options
 shopt -s histappend
-shopt -s checkwinsize
 
-# history behavior
-# ignore duplicates and whitespace prefixed commands
-HISTCONTROL=ignoreboth
+# https://wiki.archlinux.org/title/bash#Common_programs_and_options
+# sourced in /etc/bash.bashrc
+# [[ $- != *i* ]] && return
+# shopt -s checkwinsize
+# source /usr/share/bash-completion/bash_completion 
+
+# https://wiki.archlinux.org/title/bash#Shorter_history
+HISTCONTROL=erasedups
 
 # time
 HISTTIMEFORMAT='%D %I:%M %p '
@@ -27,7 +29,7 @@ export LESS='-R --use-color -Dd+r$Du+b'
 # https://wiki.archlinux.org/title/Color_output_in_console#man
 export MANPAGER='less -R --use-color -Dd+r -Du+b'
 
-# use nvim
+# nvim
 export EDITOR=nvim
 export VISUAL=nvim
 
@@ -60,41 +62,39 @@ PS1='\[$BLUE\w$(git_prompt)\]
 
 # color
 alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias diff='diff --color=auto'
-
-alias grep='grep --color=auto -n'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias ip='ip --color=auto'
+alias diff='diff --color=auto'
+alias grep='grep -n --color=auto --exclude-dir=data_sets'
 
 # shortcuts
-alias ll='ls -alF'
-alias la='ls -A'
-alias lt='ls -altrh'
-alias lr='ls -alSrh'
-alias lll='lsd -liFS'
-alias mount='mount | column -t'
 alias l='ls --group-directories-first -la'
-alias ldd='ls --group-directories-first -l'
+alias la='ls -A'
+alias ll='ls -alF'
+alias lt='lsd -liFS'
+alias mount='mount | column -t'
 alias duffy='sudo du -sch .[!.]* * | sort -rh'
+# alias ldd='ls --group-directories-first -l'
+# alias lt='ls -altrh'
+# alias lr='ls -alSrh'
 
 # test entropy
+# https://wiki.archlinux.org/title/Random_number_generation#/dev/random
 alias ent='cat /proc/sys/kernel/random/entropy_avail'
+alias pool='cat /proc/sys/kernel/random/pools'
 
 # netctl
+# https://wiki.archlinux.org/title/netctl#Obfuscate_wireless_passphrase
 alias wifi='sudo wifi-menu -o'
 
-# extend sudo timeout
+# https://wiki.archlinux.org/title/Sudo#Passing_aliases
 alias sudo='sudo -v; sudo '
 
-# update mirrors
+# man reflector
 alias reflect="sudo reflector --verbose --protocol https \
 	--latest 6  --sort rate --country 'United States'\
 	--save /etc/pacman.d/mirrorlist"
 
-# package viewer
+# https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Browsing_packages
 alias sc="pacman -Qq | fzf --preview 'pacman -Qil {}' \
 	--layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
