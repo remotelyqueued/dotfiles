@@ -9,27 +9,21 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 call plug#end()
-    
+
 set completeopt=menu,menuone,noselect
-set nocompatible            " disable compatibility to old-time vi
-set showmatch               " show matching 
-set ignorecase              " case insensitive 
-set mouse=v                 " middle-click paste with 
-set hlsearch                " highlight search 
-set incsearch               " incremental search
-set tabstop=2              " number of columns occupied by a tab 
-set softtabstop=2           " see multiple spaces as tabstops so <BS> does the right thing
-set expandtab               " converts tabs to white space
-set shiftwidth=2            " width for autoindents
-set autoindent              " indent a new line the same amount as the line just typed
-set number                  " add line numbers
-set wildmode=longest,list   " get bash-like tab completions
-" set cc=80                  " set an 80 column border for good coding style
-filetype plugin indent on   "allow auto-indenting depending on file type
-syntax on                   " syntax highlighting
-filetype plugin on
-" set cursorline              " highlight current cursorline
-set ttyfast                 " Speed up scrolling in Vim
+set expandtab
+set fillchars+=vert:\
+set hidden
+set ignorecase 
+set list listchars=trail:»,tab:»-
+set number
+set showmatch 
+set shiftwidth=2 softtabstop=2 tabstop=2
+set title
+set wildmode=longest,list
+set wrap breakindent
+" set cc=80
+" set cursorline
 
 lua <<EOF
 local has_words_before = function()
@@ -48,9 +42,6 @@ end
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     mapping = {
@@ -87,9 +78,6 @@ end
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
     })
