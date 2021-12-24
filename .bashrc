@@ -1,6 +1,10 @@
 ###
 # arch
 ##
+# https://wiki.archlinux.org/title/environment_variables#Per_user
+# https://wiki.archlinux.org/title/Node.js_#Allow_user-wide_installations
+PATH="$HOME/.local/bin:$PATH"
+export npm_config_prefix="$HOME/.local"
 
 # shell options
 shopt -s histappend
@@ -11,6 +15,7 @@ shopt -s histappend
 # shopt -s checkwinsize
 # source /usr/share/bash-completion/bash_completion 
 
+# 
 # https://wiki.archlinux.org/title/bash#Shorter_history
 HISTCONTROL=erasedups
 
@@ -23,13 +28,15 @@ HISTSIZE=
 # number of lines stored in file after session
 HISTFILESIZE=
 
+# colorize less
 # https://wiki.archlinux.org/title/Color_output_in_console#less
 export LESS='-R --use-color -Dd+r$Du+b'
 
+# colorize man
 # https://wiki.archlinux.org/title/Color_output_in_console#man
 export MANPAGER='less -R --use-color -Dd+r -Du+b'
 
-# nvim
+# default nvim
 export EDITOR=nvim
 export VISUAL=nvim
 
@@ -73,9 +80,6 @@ alias ll='ls -alF'
 alias lt='lsd -liFS'
 alias mount='mount | column -t'
 alias duffy='sudo du -sch .[!.]* * | sort -rh'
-# alias ldd='ls --group-directories-first -l'
-# alias lt='ls -altrh'
-# alias lr='ls -alSrh'
 
 # test entropy
 # https://wiki.archlinux.org/title/Random_number_generation#/dev/random
@@ -86,6 +90,7 @@ alias pool='cat /proc/sys/kernel/random/pools'
 # https://wiki.archlinux.org/title/netctl#Obfuscate_wireless_passphrase
 alias wifi='sudo wifi-menu -o'
 
+# extend sudo timeout
 # https://wiki.archlinux.org/title/Sudo#Passing_aliases
 alias sudo='sudo -v; sudo '
 
@@ -119,6 +124,8 @@ alias journal='journalctl -p 3 -xb'
 #	[v1] magicsock: rx [1GaNB] set as new priority
 #       [v2] [1GaNB]
 #	if enabled - multiple connections are attempted at startup
+# may need to disable nordvpn firewall
+# sudo iptables -S 
 alias vpn-start='sudo systemctl start nordvpnd.service'
 	# nordvpn connect Canada && 
 	# nordvpn settings && nordvpn status'
@@ -139,3 +146,10 @@ alias vm-stop='sudo virsh net-destroy default &&
 # razer
 alias razer-start='systemctl --user start openrazer-daemon.service'
 alias razer-stop='systemctl --user stop openrazer-daemon.service'
+
+# decrypt
+# export SSLKEYLOGFILE=/home/ryan/.mozilla/ssl-key.log
+
+# privoxy
+# https://wiki.archlinux.org/title/privoxy
+# http_proxy="http://localhost:8118"
