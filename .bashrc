@@ -13,9 +13,9 @@ shopt -s histappend
 # sourced in /etc/bash.bashrc
 # [[ $- != *i* ]] && return
 # shopt -s checkwinsize
-# source /usr/share/bash-completion/bash_completion 
+# source /usr/share/bash-completion/bash_completion
 
-# 
+#
 # https://wiki.archlinux.org/title/bash#Shorter_history
 HISTCONTROL=erasedups
 
@@ -54,12 +54,12 @@ YELLOW=$(tput setaf 3)
 
 # git
 git_prompt() {
-	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
-	if [ -n "$BRANCH" ]; then
-		echo -n "$YELLOW$BRANCH"
-	if [ -n "$(git status --short)" ]; then
-		echo "${RED} ✗ "
-	fi
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
+  if [ -n "$BRANCH" ]; then
+    echo -n "$YELLOW$BRANCH"
+  if [ -n "$(git status --short)" ]; then
+    echo "${RED} ✗ "
+  fi
 fi
 }
 
@@ -96,20 +96,20 @@ alias sudo='sudo -v; sudo '
 
 # man reflector
 alias reflect="sudo reflector --verbose --protocol https \
-	--latest 6  --sort rate --country 'United States'\
-	--save /etc/pacman.d/mirrorlist"
+  --latest 6  --sort rate --country 'United States'\
+  --save /etc/pacman.d/mirrorlist"
 
 # https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Browsing_packages
 alias sc="pacman -Qq | fzf --preview 'pacman -Qil {}' \
-	--layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+  --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 # sublime text
 alias subl='firejail subl'
 
 # nord
 alias nord='nordvpn connect Seattle &&
-	nordvpn settings &&
-	nordvpn status'
+  nordvpn settings &&
+  nordvpn status'
 
 #
 # systemd
@@ -120,28 +120,28 @@ alias journal='journalctl -p 3 -xb'
 # vpn
 # todo: switch to openvpn
 # common issues:
-# 	open-conn-track: timeout opening
-#	[v1] magicsock: rx [1GaNB] set as new priority
+#   open-conn-track: timeout opening
+# [v1] magicsock: rx [1GaNB] set as new priority
 #       [v2] [1GaNB]
-#	if enabled - multiple connections are attempted at startup
+# if enabled - multiple connections are attempted at startup
 # may need to disable nordvpn firewall
-# sudo iptables -S 
+# sudo iptables -S
 alias vpn-start='sudo systemctl start nordvpnd.service'
-	# nordvpn connect Canada && 
-	# nordvpn settings && nordvpn status'
+  # nordvpn connect Canada &&
+  # nordvpn settings && nordvpn status'
 
-alias vpn-stop='sudo systemctl stop nordvpnd.service' 
+alias vpn-stop='sudo systemctl stop nordvpnd.service'
 
 # kvm qemu
 alias vm-start='sudo systemctl start libvirtd.service &&
-	sudo virsh net-start default &&
-	sudo virsh net-list --all'
+  sudo virsh net-start default &&
+  sudo virsh net-list --all'
 
 alias vm-stop='sudo virsh net-destroy default &&
-	sudo systemctl stop libvirtd.service &&
-	sudo systemctl stop libvirtd-admin.socket &&
-	sudo systemctl stop libvirtd-ro.socket &&
-	sudo systemctl stop libvirtd.socket'
+  sudo systemctl stop libvirtd.service &&
+  sudo systemctl stop libvirtd-admin.socket &&
+  sudo systemctl stop libvirtd-ro.socket &&
+  sudo systemctl stop libvirtd.socket'
 
 # razer
 alias razer-start='systemctl --user start openrazer-daemon.service'
