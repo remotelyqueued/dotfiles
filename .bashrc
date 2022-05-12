@@ -1,10 +1,6 @@
 ###
 # arch
 ##
-# https://wiki.archlinux.org/title/environment_variables#Per_user
-# https://wiki.archlinux.org/title/Node.js_#Allow_user-wide_installations
-PATH="$HOME/.local/bin:$PATH"
-export npm_config_prefix="$HOME/.local"
 
 # shell options
 shopt -s histappend
@@ -15,7 +11,6 @@ shopt -s histappend
 # shopt -s checkwinsize
 # source /usr/share/bash-completion/bash_completion
 
-#
 # https://wiki.archlinux.org/title/bash#Shorter_history
 HISTCONTROL=erasedups
 
@@ -27,6 +22,13 @@ HISTSIZE=
 
 # number of lines stored in file after session
 HISTFILESIZE=
+
+# decrypt
+# export SSLKEYLOGFILE=/home/ryan/.mozilla/ssl-key.log
+
+# privoxy
+# https://wiki.archlinux.org/title/privoxy
+# http_proxy="http://localhost:8118"
 
 # colorize less
 # https://wiki.archlinux.org/title/Color_output_in_console#less
@@ -40,10 +42,20 @@ export MANPAGER='less -R --use-color -Dd+r -Du+b'
 export EDITOR=nvim
 export VISUAL=nvim
 
+# https://wiki.archlinux.org/title/environment_variables#Per_user
+# https://wiki.archlinux.org/title/Node.js_#Allow_user-wide_installations
+# located in .profile
+# 1. isn't in $PATH, trying .bash-profile
+# PATH="$HOME/.local/bin:$PATH"
+# export npm_config_prefix="$HOME/.local"
+
 # fzf interactive search
 # https://wiki.archlinux.org/title/fzf
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
+
+# https://unix.stackexchange.com/questions/93476/gnome-terminal-keep-track-of-directory-in-new-tab
+source /etc/profile.d/vte.sh
 
 # prompt colors
 RESET=$(tput sgr0)
@@ -99,6 +111,9 @@ alias reflect="sudo reflector --verbose --protocol https \
   --latest 6  --sort rate --country 'United States'\
   --save /etc/pacman.d/mirrorlist"
 
+# static server
+alias serve="http-server -p 8000 --cors -c-1 --log-ip -r"
+
 # https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Browsing_packages
 alias sc="pacman -Qq | fzf --preview 'pacman -Qil {}' \
   --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
@@ -106,31 +121,10 @@ alias sc="pacman -Qq | fzf --preview 'pacman -Qil {}' \
 # sublime text
 alias subl='firejail subl'
 
-# nord
-alias nord='nordvpn connect Seattle &&
-  nordvpn settings &&
-  nordvpn status'
-
-#
 # systemd
 # +adm / +wheel group
 alias failed='systemctl --failed'
 alias journal='journalctl -p 3 -xb'
-
-# vpn
-# todo: switch to openvpn
-# common issues:
-#   open-conn-track: timeout opening
-# [v1] magicsock: rx [1GaNB] set as new priority
-#       [v2] [1GaNB]
-# if enabled - multiple connections are attempted at startup
-# may need to disable nordvpn firewall
-# sudo iptables -S
-alias vpn-start='sudo systemctl start nordvpnd.service'
-  # nordvpn connect Canada &&
-  # nordvpn settings && nordvpn status'
-
-alias vpn-stop='sudo systemctl stop nordvpnd.service'
 
 # kvm qemu
 alias vm-start='sudo systemctl start libvirtd.service &&
@@ -143,13 +137,8 @@ alias vm-stop='sudo virsh net-destroy default &&
   sudo systemctl stop libvirtd-ro.socket &&
   sudo systemctl stop libvirtd.socket'
 
+alias tracep="for ttl in {1..30}; do ping -4 -c 1 -t $ttl example.com && break; done | grep -i from | nl -s ' ' -w 2"
+
 # razer
 alias razer-start='systemctl --user start openrazer-daemon.service'
 alias razer-stop='systemctl --user stop openrazer-daemon.service'
-
-# decrypt
-# export SSLKEYLOGFILE=/home/ryan/.mozilla/ssl-key.log
-
-# privoxy
-# https://wiki.archlinux.org/title/privoxy
-# http_proxy="http://localhost:8118"

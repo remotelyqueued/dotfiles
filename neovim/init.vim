@@ -105,4 +105,7 @@ end
   require('lspconfig')['.solidity_ls'].setup {
     capabilities = capabilities
   }
+  require('lspconfig')['.eslint'].setup {
+    capabilities = capabilities
+  }
 EOF
