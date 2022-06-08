@@ -18,3 +18,5 @@
         done < <(git logx && echo);"'
 [init]
 	defaultBranch = main
+[core]
+	editor = code

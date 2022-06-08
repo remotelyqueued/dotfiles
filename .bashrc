@@ -112,7 +112,7 @@ alias reflect="sudo reflector --verbose --protocol https \
   --save /etc/pacman.d/mirrorlist"
 
 # static server
-alias serve="http-server -p 8000 --cors -c-1 --log-ip -r"
+alias serve="http-server -p 5500 --cors -c-1 --log-ip -r"
 
 # https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Browsing_packages
 alias sc="pacman -Qq | fzf --preview 'pacman -Qil {}' \
